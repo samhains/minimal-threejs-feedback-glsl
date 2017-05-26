@@ -1,6 +1,6 @@
 <html>
 <head>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.min.js"></script>
 	<style>
 		/* We want our scene to span the entire window */
 		body { margin: 0; }
@@ -82,7 +82,7 @@
 			//Pass textureA to shader
 			bufferMaterial = new THREE.ShaderMaterial( {
 				uniforms: {
-				 bufferTexture: { type: "t", value: textureA },
+				 bufferTexture: { type: "t", value: textureA.texture },
 				 res : {type: 'v2',value:new THREE.Vector2(window.innerWidth,window.innerHeight)},//Keeps the resolution
 				 videoTexture: {type: "t", value: videoTexture },
 				 time: {type:"f",value:Math.random()*Math.PI*2+Math.PI}
@@ -121,8 +121,8 @@
 		  var t = textureA;
 		  textureA = textureB;
 		  textureB = t;
-		  quad.material.map = textureB;
-		  bufferMaterial.uniforms.bufferTexture.value = textureA;
+		  quad.material.map = textureB.texture;
+		  bufferMaterial.uniforms.bufferTexture.value = textureA.texture;
 
 		  //Update time
 		  bufferMaterial.uniforms.time.value += 0.01;
