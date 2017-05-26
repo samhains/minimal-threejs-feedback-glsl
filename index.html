@@ -28,7 +28,19 @@
 	<script>
 		var scene;
 		var camera;
+
 		var renderer;
+		var bufferScene;
+		var textureA;
+		var textureB;
+		var bufferMaterial;
+		var plane;
+		var bufferObject;
+		var finalMaterial;
+		var quad;
+        var video;
+        var videoTexture;
+
 
 		function sceneSetup(){
 			scene = new THREE.Scene();
@@ -41,17 +53,6 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 		}
-
-		var bufferScene;
-		var textureA;
-		var textureB;
-		var bufferMaterial;
-		var plane;
-		var bufferObject;
-		var finalMaterial;
-		var quad;
-        var video;
-        var videoTexture;
 
 		function videoTextureSetup() {
 			video = document.getElementById( 'video' );
@@ -97,9 +98,7 @@
 
 		bufferTextureSetup();
 
-		
 
-		//Render everything!
 		function render() {
 
 		  requestAnimationFrame( render );
