@@ -1,10 +1,6 @@
 <html>
 <head>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.min.js"></script>
-	<style>
-		/* We want our scene to span the entire window */
-		body { margin: 0; }
-	</style>
 </head>
 <body>
 
@@ -15,7 +11,6 @@
 	<script id="fragShader" type="shader-code">
 		uniform vec2 res;//The width and height of our screen
 		uniform sampler2D bufferTexture;//Our input texture
-		uniform vec3 smokeSource;//The x,y are the posiiton. The z is the power/density
 		uniform sampler2D videoTexture;
 		uniform float time;
 		void main() {
@@ -31,18 +26,14 @@
 		 }
 	</script>
 	<script>
-		//@author Omar Shehata. 2015.
-		//We are loading the Three.js library from the cdn here: http://cdnjs.com/libraries/three.js/
 		var scene;
 		var camera;
 		var renderer;
 
 		function sceneSetup(){
-			//This is the basic scene setup
 			scene = new THREE.Scene();
 			var width = window.innerWidth;
 			var height = window.innerHeight;
-			//Note that we're using an orthographic camera here rather than a prespective
 			camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
 			camera.position.z = 2;
 
@@ -72,8 +63,6 @@
 		}
 
 		function bufferTextureSetup(){
-			
-
 			//Create buffer scene
 			bufferScene = new THREE.Scene();
 			//Create 2 buffer textures
@@ -83,7 +72,8 @@
 			bufferMaterial = new THREE.ShaderMaterial( {
 				uniforms: {
 				 bufferTexture: { type: "t", value: textureA.texture },
-				 res : {type: 'v2',value:new THREE.Vector2(window.innerWidth,window.innerHeight)},//Keeps the resolution
+				 res : {type: 'v2',value:new THREE.Vector2(window.innerWidth,window.innerHeight)},
+				 //Keeps the resolution
 				 videoTexture: {type: "t", value: videoTexture },
 				 time: {type:"f",value:Math.random()*Math.PI*2+Math.PI}
 				},
